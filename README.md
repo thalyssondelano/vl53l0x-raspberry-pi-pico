@@ -1,59 +1,59 @@
-# Sensor de Distância a Laser VL53L0X com Raspberry Pi Pico
+# VL53L0X Laser Distance Sensor with Raspberry Pi Pico
 
-Este repositório contém um projeto em C para utilizar o sensor de distância a laser Time-of-Flight (ToF) VL53L0X com a placa Raspberry Pi Pico.
+This repository contains a C project to use the VL53L0X Time-of-Flight (ToF) laser distance sensor with the Raspberry Pi Pico board.
 
-## ✨ Funcionalidades
+## ✨ Features
 
--   Integração com o sensor de distância a laser VL53L0X.
--   Leitura contínua da distância em milímetros.
--   Comunicação via I2C com a Raspberry Pi Pico.
--   Projeto configurado para fácil compilação com o SDK do Raspberry Pi Pico e CMake.
+-   Integration with the VL53L0X laser distance sensor.
+-   Continuous distance reading in millimeters.
+-   I2C communication with the Raspberry Pi Pico.
+-   Project configured for easy compilation with the Raspberry Pi Pico SDK and CMake.
 
-## 🛠️ Hardware Necessário
+## 🛠️ Required Hardware
 
--   **Raspberry Pi Pico** ou **Pico W**
--   **Sensor de Distância a Laser VL53L0X**
--   **Cabos/Jumpers** para conexão
+-   **Raspberry Pi Pico** or **Pico W**
+-   **VL53L0X Laser Distance Sensor**
+-   **Cables/Jumper wires** for connection
 
-## 📦 Software e Dependências
+## 📦 Software and Dependencies
 
 -   **Visual Studio Code**
--   **Extensão Raspberry Pi Pico/W para VS Code**
--   **Raspberry Pi Pico SDK**, **ARM GCC Compiler** e **CMake**
+-   **Raspberry Pi Pico/W Extension for VS Code**
+-   **Raspberry Pi Pico SDK**, **ARM GCC Compiler**, and **CMake**
 
-## 🔌 Conexões
+## 🔌 Connections
 
-Conecte o sensor VL53L0X à Raspberry Pi Pico utilizando a interface I2C0, conforme definido no arquivo `src/sensor-distancia-laser.c`:
+Connect the VL53L0X sensor to the Raspberry Pi Pico using the I2C0 interface, as defined in the `src/sensor-distancia-laser.c` file:
 
-| Pino do VL53L0X | Pino da Raspberry Pi Pico | Descrição        |
-| :-------------- | :------------------------ | :--------------- |
-| **VIN** | **3V3 (OUT)**   | Alimentação      |
-| **GND** | **GND**        | Terra            |
-| **SCL** | **GP1 (I2C0 SCL)**  | Clock do I2C     |
-| **SDA** | **GP0 (I2C0 SDA)** | Dados do I2C     |
+| VL53L0X Pin | Raspberry Pi Pico Pin     | Description      |
+| :---------- | :------------------------ | :--------------- |
+| **VIN** | **3V3 (OUT)** | Power Supply     |
+| **GND** | **GND** | Ground           |
+| **SCL** | **GP1 (I2C0 SCL)** | I2C Clock        |
+| **SDA** | **GP0 (I2C0 SDA)** | I2C Data         |
 
-## 🚀 Como Compilar e Executar
+## 🚀 How to Compile and Run
 
-### Usando o VS Code com a Extensão Raspberry Pi Pico (Recomendado)
+### Using VS Code with the Raspberry Pi Pico Extension (Recommended)
 
-Este projeto já está configurado para a extensão oficial, tornando o processo muito simples.
+This project is already configured for the official extension, making the process very simple.
 
-1.  **Abra o Projeto:** Abra a pasta raiz do projeto no Visual Studio Code.
-2.  **Prepare a Placa:** Coloque a Raspberry Pi Pico em modo **BOOTSEL** (pressione e segure o botão BOOTSEL enquanto conecta o cabo USB).
-3.  **Envie o Código:** Clique no botão **`Run`** na barra de status ou use o atalho. A extensão irá compilar o código e enviá-lo automaticamente para a placa usando o `picotool`.
-6.  **Visualize a Saída:** Abra o monitor serial integrado do VS Code para ver as medições de distância.
+1.  **Open the Project:** Open the project root folder in Visual Studio Code.
+2.  **Prepare the Board:** Put the Raspberry Pi Pico into **BOOTSEL** mode (press and hold the BOOTSEL button while connecting the USB cable).
+3.  **Upload the Code:** Click the **`Run`** button in the status bar or use the shortcut. The extension will automatically compile the code and flash it to the board using `picotool`.
+4.  **View Output:** Open the integrated serial monitor in VS Code to view distance measurements.
 
-### Usando a Linha de Comando
+### Using the Command Line
 
-Se preferir não usar o VS Code, você pode compilar manualmente.
+If you prefer not to use VS Code, you can compile manually.
 
-1.  **Clone o repositório:**
+1.  **Clone the repository:**
     ```bash
-    git clone <URL_DO_SEU_REPOSITORIO>
-    cd <NOME_DA_PASTA>
+    git clone <YOUR_REPOSITORY_URL>
+    cd <FOLDER_NAME>
     ```
-2.  **Crie e configure o build:**
-    * Certifique-se de que a variável de ambiente `PICO_SDK_PATH` aponta para o diretório do seu SDK.
+2.  **Create and configure the build:**
+    * Ensure the `PICO_SDK_PATH` environment variable points to your SDK directory.
     ```bash
     mkdir build
     cd build
@@ -63,26 +63,26 @@ Se preferir não usar o VS Code, você pode compilar manualmente.
     ```bash
     make
     ```
-4.  **Carregue o firmware (`.uf2`):**
-    -   Coloque a Pico em modo **BOOTSEL**.
-    -   Copie o arquivo `build/sensor-distancia-laser.uf2` para o drive que a Pico montou no seu sistema.
+4.  **Load the firmware (`.uf2`):**
+    -   Put the Pico into **BOOTSEL** mode.
+    -   Copy the `build/sensor-distancia-laser.uf2` file to the drive mounted by the Pico on your system.
 
-## 📂 Estrutura do Projeto
+## 📂 Project Structure
 
 ```
 .
-├── .vscode/               # Arquivos de configuração do Visual Studio Code para a extensão
-├── build/                 # Diretório (ignorado) onde os arquivos de compilação são gerados
-├── inc/                   # Arquivos de cabeçalho (.h)
+├── .vscode/               # Visual Studio Code configuration files for the extension
+├── build/                 # Directory (ignored) where build files are generated
+├── inc/                   # Header files (.h)
 │   └── tof.h
-├── src/                   # Arquivos de código-fonte (.c)
+├── src/                   # Source code files (.c)
 │   ├── sensor-distancia-laser.c
 │   └── tof.c
-├── .gitignore             # Arquivos e pastas ignorados pelo Git
-├── CMakeLists.txt         # Arquivo de configuração do CMake para o projeto
-├── LICENSE                # Licença do projeto
-└── pico_sdk_import.cmake  # Script para importar o SDK do Pico
+├── .gitignore             # Files and folders ignored by Git
+├── CMakeLists.txt         # CMake configuration file for the project
+├── LICENSE                # Project license
+└── pico_sdk_import.cmake  # Script to import the Pico SDK
 ```
-## 📄 Licença
+## 📄 License
 
-Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
